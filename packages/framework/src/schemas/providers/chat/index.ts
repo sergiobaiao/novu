@@ -5,6 +5,7 @@ import { photonImessageProviderSchemas } from './photon-imessage.schema';
 import { slackProviderSchemas } from './slack.schema';
 
 export const chatProviderSchemas = {
+  'aws-whatsapp': genericProviderSchemas,
   'chat-webhook': genericProviderSchemas,
   discord: genericProviderSchemas,
   'google-chat': genericProviderSchemas,

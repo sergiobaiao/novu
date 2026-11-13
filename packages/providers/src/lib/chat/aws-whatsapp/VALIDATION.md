@@ -32,3 +32,22 @@ A simulated HTTP transport exercised the actual provider and SDK for 3,500 signe
 Enterprise validation and the full monorepo build are blocked by unavailable private `packages-enterprise` sources; affected Community builds passed separately. Three existing schema-generator lint errors were reproduced on the baseline. Mobile dashboard configuration retains the existing desktop prompt and clipped drawer.
 
 Long-running IAM credential rotation, production throttling, live reactions and asynchronous delivery failure consumption remain unverified. Delivery webhooks, inbound conversations, template administration, consent storage and media uploading belong to the consuming application, outside this outbound provider.
+
+## New-provider contribution guide review
+
+Reviewed the official [Add a New Provider guide](https://docs.novu.co/community/add-a-new-provider?utm_campaign=github-contrib) on 2026-11-13 against the repository implementation.
+
+| Guide requirement | Implementation |
+| --- | --- |
+| Provider in its channel directory, adjacent spec, channel export | Chat provider, spec and export present |
+| Follow channel interface and BaseProvider override behavior | Shared WhatsApp base implements IChatProvider and preserves transform precedence |
+| Credentials, provider enum and integration catalog | Registered; existing credential keys/interface/storage/encryption reused; missing apiVersion DTO field added |
+| Framework enum and provider schema registry | Added AwsWhatsApp and generic Chat schema entry during this review |
+| Handler and factory | Direct handler import and factory registration follow current Chat factory conventions; no handler barrel exists |
+| Integration logo | Existing WhatsApp asset reused through catalog filenames and the dashboard square-icon alias |
+| Build, unit tests and local application validation | Affected builds and Community checks recorded above; additional framework checks below |
+| Fork, commit, push and upstream pull request | Fork/branch published; upstream PR creation remains restricted to repository collaborators |
+
+The framework review added an execution test for an `aws-whatsapp` code-first Chat provider resolver. Focused framework tests: **71 passed, 2 existing skips**, no reported type errors. Framework build, package exports and circular-dependency checks passed. These are additional to the 1,156 prior test passes.
+
+The guide does not describe a collaborator requirement or an acceptance action that removes GitHub's PR restriction. Its generic setup commands were not rerun; the existing Docker environment was used.
