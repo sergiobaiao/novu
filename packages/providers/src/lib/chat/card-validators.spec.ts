@@ -29,6 +29,9 @@ describe('getChatCardValidator', () => {
     expect(getChatCardValidator(ChatProviderIdEnum.MsTeams)).toBeDefined();
     expect(getChatCardValidator(ChatProviderIdEnum.Telegram)).toBeDefined();
     expect(getChatCardValidator(ChatProviderIdEnum.WhatsAppBusiness)).toBeDefined();
+    expect(getChatCardValidator(ChatProviderIdEnum.AwsWhatsApp)).toBe(
+      getChatCardValidator(ChatProviderIdEnum.WhatsAppBusiness)
+    );
   });
 
   test('returns undefined for markdown-fallback providers and unknown ids', () => {

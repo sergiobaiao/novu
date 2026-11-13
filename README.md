@@ -226,11 +226,12 @@ Expand a channel below to browse supported providers.
 </details>
 
 <details>
-<summary><strong>💬 Chat</strong> (13 providers)</summary>
+<summary><strong>💬 Chat</strong> (14 providers)</summary>
 
 | Provider |
 | --- |
 | [Chat Webhook](https://github.com/novuhq/novu/tree/next/packages/providers/src/lib/chat/chat-webhook) |
+| [AWS End User Messaging Social (WhatsApp)](https://github.com/novuhq/novu/tree/next/packages/providers/src/lib/chat/aws-whatsapp) |
 | [Discord](https://github.com/novuhq/novu/tree/next/packages/providers/src/lib/chat/discord) |
 | [GetStream](https://github.com/novuhq/novu/tree/next/packages/providers/src/lib/chat/getstream) |
 | [Grafana OnCall](https://github.com/novuhq/novu/tree/next/packages/providers/src/lib/chat/grafana-on-call) |

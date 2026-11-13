@@ -615,6 +615,29 @@ describe('processProviderOverridesIssues', () => {
     ]);
   });
 
+  it.each([ChatProviderIdEnum.WhatsAppBusiness, ChatProviderIdEnum.AwsWhatsApp])(
+    'accepts named template parameters in the workflow editor for %s',
+    (providerId) => {
+      const issues = processProviderOverridesIssues({
+        [providerId]: {
+          type: 'template',
+          template: {
+            name: 'lembrete_agendamento',
+            language: { code: 'pt_BR', policy: 'deterministic' },
+            components: [
+              {
+                type: 'body',
+                parameters: [{ type: 'text', parameter_name: 'nome', text: '{{payload.nome}}' }],
+              },
+            ],
+          },
+        },
+      });
+
+      expect(issues.controls).toBeUndefined();
+    }
+  );
+
   it('narrows WhatsApp MediaObject oneOf errors when neither id nor link is present', () => {
     const issues = processProviderOverridesIssues({
       [ChatProviderIdEnum.WhatsAppBusiness]: {

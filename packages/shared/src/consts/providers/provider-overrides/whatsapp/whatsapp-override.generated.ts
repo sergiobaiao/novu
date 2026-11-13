@@ -1154,6 +1154,11 @@ export const whatsappOverrideJsonSchema: JSONSchemaDto = {
           "type": "string",
           "description": "The message's text.",
           "maxLength": 32768
+        },
+        "parameter_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The variable name in an approved named template."
         }
       },
       "additionalProperties": false

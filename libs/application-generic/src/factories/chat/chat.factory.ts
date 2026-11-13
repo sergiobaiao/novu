@@ -1,4 +1,5 @@
 import { IntegrationEntity } from '@novu/dal';
+import { AwsWhatsAppHandler } from './handlers/aws-whatsapp.handler';
 import { ChatWebhookHandler } from './handlers/chat-webhook.handler';
 import { DiscordHandler } from './handlers/discord.handler';
 import { GetstreamChatHandler } from './handlers/getstream.handler';
@@ -34,6 +35,7 @@ export class ChatFactory implements IChatFactory {
     new GetstreamChatHandler(),
     new RocketChatHandler(),
     new WhatsAppBusinessHandler(),
+    new AwsWhatsAppHandler(),
     new LineHandler(),
     new TelegramHandler(),
     new WebexMessagingHandler(),

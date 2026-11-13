@@ -1378,6 +1378,50 @@ export const iMediaConfig: IConfigCredential[] = [
   ...smsConfigBase,
 ];
 
+export const awsWhatsAppConfig: IConfigCredential[] = [
+  {
+    key: CredentialsKeyEnum.ApiKey,
+    displayName: 'AWS access key ID',
+    description: 'Leave both AWS keys empty to use the worker IAM role or default AWS credential chain',
+    type: 'string',
+    required: false,
+  },
+  {
+    key: CredentialsKeyEnum.SecretKey,
+    displayName: 'AWS secret access key',
+    type: 'string',
+    required: false,
+  },
+  {
+    key: CredentialsKeyEnum.Token,
+    displayName: 'AWS session token',
+    description: 'Required only when using temporary AWS access keys',
+    type: 'string',
+    required: false,
+  },
+  {
+    key: CredentialsKeyEnum.Region,
+    displayName: 'AWS region',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.phoneNumberIdentification,
+    displayName: 'AWS origination phone number ID',
+    description:
+      'The phone-number-id-... identifier or ARN from AWS End User Messaging Social, not the Meta phone number ID',
+    type: 'string',
+    required: true,
+  },
+  {
+    key: CredentialsKeyEnum.ApiVersion,
+    displayName: 'Meta API version',
+    description: 'A version supported by AWS End User Messaging Social, formatted as vXX.0',
+    type: 'string',
+    required: true,
+  },
+];
+
 export const whatsAppBusinessConfig: IConfigCredential[] = [
   {
     key: CredentialsKeyEnum.ApiToken,

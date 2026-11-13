@@ -529,6 +529,19 @@ function applySpecPatches(schema: JSONSchemaDto): JSONSchemaDto {
 
   definitions.MediaObject = patchMediaObjectDefinition(mediaObject);
 
+  const textParameter = definitions.TextParameter;
+  if (!textParameter || typeof textParameter === 'boolean' || !textParameter.properties?.text) {
+    throw new Error('Spec patch target missing: definitions.TextParameter.properties.text.');
+  }
+  // The vendored Meta OpenAPI omits the name sent with named-template text parameters.
+  definitions.TextParameter = {
+    ...textParameter,
+    properties: {
+      ...textParameter.properties,
+      parameter_name: { type: 'string', minLength: 1, description: 'The variable name in an approved named template.' },
+    },
+  };
+
   const withMediaPatch = { ...schema, definitions };
   const patched = mapSchemaNodes(withMediaPatch, (node) => {
     if (node.pattern !== BROKEN_TEMPLATE_INDEX_PATTERN) {
