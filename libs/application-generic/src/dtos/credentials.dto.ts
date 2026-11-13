@@ -14,6 +14,11 @@ export class CredentialsDto implements ICredentials {
   @ApiPropertyOptional()
   @IsString()
   @IsOptional()
+  apiVersion?: string;
+
+  @ApiPropertyOptional()
+  @IsString()
+  @IsOptional()
   apiKey?: string;
 
   @ApiPropertyOptional()

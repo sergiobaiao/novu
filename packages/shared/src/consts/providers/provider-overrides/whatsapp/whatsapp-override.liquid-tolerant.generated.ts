@@ -1996,6 +1996,19 @@ export const whatsappOverrideLiquidTolerantJsonSchema: JSONSchemaDto = {
                   "pattern": "\\{\\{|\\{%"
                 }
               ]
+            },
+            "parameter_name": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "The variable name in an approved named template."
+                },
+                {
+                  "type": "string",
+                  "pattern": "\\{\\{|\\{%"
+                }
+              ]
             }
           },
           "additionalProperties": false
