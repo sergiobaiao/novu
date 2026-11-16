@@ -1801,6 +1801,40 @@ describe('Novu Client', () => {
       );
     });
 
+    it('should execute an AWS WhatsApp provider resolver', async () => {
+      const newWorkflow = workflow('test-workflow', async ({ step }) => {
+        await step.chat('send-whatsapp', async () => ({ body: 'WhatsApp test' }), {
+          providers: {
+            'aws-whatsapp': async ({ outputs }) => ({
+              type: 'text',
+              text: { body: outputs.body, preview_url: false },
+            }),
+          },
+        });
+      });
+
+      await client.addWorkflows([newWorkflow]);
+      const event: Event = {
+        action: PostActionEnum.EXECUTE,
+        workflowId: 'test-workflow',
+        stepId: 'send-whatsapp',
+        subscriber: {},
+        state: [],
+        payload: {},
+        controls: {},
+        context: {},
+        env: testEventEnv,
+      };
+
+      const executionResult = await client.executeWorkflow(event);
+      expect(executionResult.providers).toEqual({
+        'aws-whatsapp': {
+          type: 'text',
+          text: { body: 'WhatsApp test', preview_url: false },
+        },
+      });
+    });
+
     it('should execute a tool-webhook provider resolver', async () => {
       const newWorkflow = workflow('test-workflow', async ({ step }) => {
         await step.tool('send-webhook', async () => ({ body: 'Default body' }), {

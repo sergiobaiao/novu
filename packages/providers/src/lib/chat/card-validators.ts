@@ -21,6 +21,7 @@ const CHAT_CARD_VALIDATORS: Partial<Record<ChatProviderIdEnum, ChatCardValidator
   [ChatProviderIdEnum.MsTeams]: validateTeamsCard,
   [ChatProviderIdEnum.Telegram]: validateTelegramCard,
   [ChatProviderIdEnum.WhatsAppBusiness]: validateWhatsAppCard,
+  [ChatProviderIdEnum.AwsWhatsApp]: validateWhatsAppCard,
 };
 
 /** Returns the card validator for a chat provider, or `undefined` when the provider has no limits. */

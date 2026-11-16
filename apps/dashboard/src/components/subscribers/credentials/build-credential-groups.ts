@@ -126,6 +126,7 @@ function getProviderDisplayName(providerId: string): string {
 
 /** Chat providers that deliver to the subscriber's phone number rather than a webhook/channel endpoint. */
 const PHONE_BASED_CHAT_PROVIDERS = new Set<string>([
+  ChatProviderIdEnum.AwsWhatsApp,
   ChatProviderIdEnum.WhatsAppBusiness,
   ChatProviderIdEnum.Sendblue,
   ChatProviderIdEnum.PhotonImessage,

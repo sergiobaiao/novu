@@ -138,4 +138,14 @@ describe('committed WhatsApp override schema', () => {
     expect(serialized).toContain('"caption"');
     expect(serialized).toContain('"filename"');
   });
+
+  it('allows optional names on template text parameters without allowing unknown properties', () => {
+    const textParameter = whatsappOverrideJsonSchema.definitions?.TextParameter;
+
+    expect(textParameter).toMatchObject({
+      additionalProperties: false,
+      properties: { parameter_name: { type: 'string', minLength: 1 } },
+    });
+    expect(typeof textParameter === 'object' && textParameter.required).not.toContain('parameter_name');
+  });
 });

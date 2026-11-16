@@ -1,5 +1,6 @@
 const PROVIDER_SQUARE_ICON_FILE_ALIASES: Record<string, string> = {
   whatsapp: 'whatsapp-business',
+  'aws-whatsapp': 'whatsapp-business',
   'novu-email-agent': 'email',
   // Conversation activity stores the platform id (`web_chat`), not the provider id.
   web_chat: 'novu-web-chat',

@@ -200,17 +200,20 @@ describe('provider override registry', () => {
     expect(getProviderOverrideKeysOnlySchema(ChatProviderIdEnum.Telegram)?.properties?.parse_mode).toBe(true);
   });
 
-  it('exposes WhatsApp keys eagerly while its schema stays behind a package subpath', () => {
-    const config = getProviderOverrideConfig(ChatProviderIdEnum.WhatsAppBusiness);
+  it.each([ChatProviderIdEnum.WhatsAppBusiness, ChatProviderIdEnum.AwsWhatsApp])(
+    'exposes WhatsApp keys eagerly while its schema stays behind a package subpath: %s',
+    (providerId) => {
+      const config = getProviderOverrideConfig(providerId);
 
-    expect(config?.schema).toBeUndefined();
-    expect(config?.schemaSubpath).toBe('@novu/shared/provider-overrides/whatsapp');
-    expect(config?.primaryContentKey).toBe('text.body');
-    expect(getProviderOverrideKeys(ChatProviderIdEnum.WhatsAppBusiness)).toContain('type');
-    expect(getProviderOverrideKeys(ChatProviderIdEnum.WhatsAppBusiness)).toContain('text');
-    expect(getProviderOverrideKeys(ChatProviderIdEnum.WhatsAppBusiness)).toContain('template');
-    expect(getProviderOverrideKeysOnlySchema(ChatProviderIdEnum.WhatsAppBusiness)?.properties?.template).toBe(true);
-  });
+      expect(config?.schema).toBeUndefined();
+      expect(config?.schemaSubpath).toBe('@novu/shared/provider-overrides/whatsapp');
+      expect(config?.primaryContentKey).toBe('text.body');
+      expect(getProviderOverrideKeys(providerId)).toContain('type');
+      expect(getProviderOverrideKeys(providerId)).toContain('text');
+      expect(getProviderOverrideKeys(providerId)).toContain('template');
+      expect(getProviderOverrideKeysOnlySchema(providerId)?.properties?.template).toBe(true);
+    }
+  );
 
   it('exposes FCM keys eagerly while its schema stays behind a package subpath', () => {
     const config = getProviderOverrideConfig(PushProviderIdEnum.FCM);

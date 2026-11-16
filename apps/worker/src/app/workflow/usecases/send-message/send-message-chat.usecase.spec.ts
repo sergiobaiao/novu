@@ -144,6 +144,32 @@ describe('SendMessageChat - phone-based channel de-duplication', () => {
     expect(channels[0].data.providerId).to.equal(ChatProviderIdEnum.WhatsAppBusiness);
     expect(channels[0].data.credentials.phoneNumber).to.equal('+15551234567');
   });
+
+  it('auto-resolves AWS WhatsApp from the subscriber phone only when its integration is active', async () => {
+    const { usecase } = buildUsecase({ activePhoneProviders: [ChatProviderIdEnum.AwsWhatsApp] });
+    const channels = await (usecase as any).resolveAllChannels(buildCommand());
+
+    expect(channels).to.have.length(1);
+    expect(channels[0].data.providerId).to.equal(ChatProviderIdEnum.AwsWhatsApp);
+    expect(channels[0].data.credentials.phoneNumber).to.equal('+15551234567');
+  });
+
+  it('does not duplicate AWS WhatsApp delivery when a phone endpoint already exists', async () => {
+    const { usecase } = buildUsecase({
+      activePhoneProviders: [ChatProviderIdEnum.AwsWhatsApp],
+      channelEndpointGroups: [
+        {
+          integrationIdentifier: 'aws-whatsapp-main',
+          providerId: ChatProviderIdEnum.AwsWhatsApp,
+          channelData: [{ identifier: 'phone', type: ENDPOINT_TYPES.PHONE, endpoint: { phoneNumber: '+15551234567' } }],
+        },
+      ],
+    });
+    const channels = await (usecase as any).resolveAllChannels(buildCommand());
+
+    expect(channels).to.have.length(1);
+    expect(channels[0].type).to.equal('new');
+  });
 });
 
 describe('SendMessageChat - Slack provider content overrides', () => {

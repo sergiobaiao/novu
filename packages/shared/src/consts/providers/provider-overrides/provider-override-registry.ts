@@ -94,6 +94,7 @@ export const PROVIDER_OVERRIDE_KEYS = {
   [ChatProviderIdEnum.Slack]: SLACK_OVERRIDE_KEYS,
   [ChatProviderIdEnum.Telegram]: TELEGRAM_OVERRIDE_KEYS,
   [ChatProviderIdEnum.WhatsAppBusiness]: WHATSAPP_OVERRIDE_KEYS,
+  [ChatProviderIdEnum.AwsWhatsApp]: WHATSAPP_OVERRIDE_KEYS,
   [PushProviderIdEnum.FCM]: FCM_OVERRIDE_KEYS,
   [PushProviderIdEnum.EXPO]: Object.keys(expoOverrideJsonSchema.properties),
 } as const satisfies Partial<Record<ToolProviderIdEnum | ChatProviderIdEnum | PushProviderIdEnum, readonly string[]>>;
@@ -161,6 +162,11 @@ const CHAT_PROVIDER_OVERRIDE_CONFIGS = {
   [ChatProviderIdEnum.WhatsAppBusiness]: {
     schemaSubpath: WHATSAPP_OVERRIDE_SCHEMA_SUBPATH,
     keys: PROVIDER_OVERRIDE_KEYS[ChatProviderIdEnum.WhatsAppBusiness],
+    primaryContentKey: WHATSAPP_PRIMARY_CONTENT_KEY,
+  },
+  [ChatProviderIdEnum.AwsWhatsApp]: {
+    schemaSubpath: WHATSAPP_OVERRIDE_SCHEMA_SUBPATH,
+    keys: PROVIDER_OVERRIDE_KEYS[ChatProviderIdEnum.AwsWhatsApp],
     primaryContentKey: WHATSAPP_PRIMARY_CONTENT_KEY,
   },
   [ChatProviderIdEnum.Line]: {
